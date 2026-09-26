@@ -37,25 +37,33 @@ enemyHealth = 30
 enemyStrength = 10
 enemyHit = 10
 
-while enemyHealth > 0 or health >0:
-    hit = int(input("Ты собираешься ударить врага с силой: "))
+while enemyHealth > 0 and health > 0:
+    hit = int(input("Ты пытаешься ударить врага. С какой силой ты хочешь удариь?"))
     if strength >= hit > 0:
         enemyHealth -= hit
-        print (f"Ты попал по врагу. У него осталось {enemyHealth} здоровья.")
+        enemyHit -= (hit / 10)
+        health -= (enemyHit/2)
+        print(f"\n\nТы ударил врага. Здоровье врага {enemyHealth}\n")
+        print(f"Враг ударил тебя с силой {enemyHit} Твое здоровье {health}\n")
+        enemyHit = 10
     elif hit <= 0:
-        hit = int(input("Ты ошибся, ударь по сильнее."))
-    else:
-        enemyHealth -= (strength % hit)
-        health -= (strength % hit)
-        enemyHit = 20
-        print (f"Ты так сильно замахнулся, что потерял равновесие и вывихнул плечо.\nТолком не попал по врагу")
-        print (f"Твое здоровье {health}, здоровье противника {enemyHealth}")
-    enemyHit += (hit // 10)
-    health -= enemyHit
-    print(f"Враг ударил тебя с силой {enemyHit} у тебя осталось {health} здоровья")
+        enemyHit += (enemyStrength / 2)
+        health -= (enemyHit * 2)
+        print(f"\n\nТы не ударил врага. Здоровье врага {enemyHealth}\n")
+        print(f"Враг ударил тебя с силой {enemyHit * 2} Твое здоровье {health}\n")
+        enemyHit = 10
+    elif strength < hit:
+        failHit = (strength // 10)
+        enemyHealth -= failHit
+        enemyHit = (enemyHit + enemyStrength)
+        health -= enemyHit
+        print(f"Ты так старался сильно ударить, что потерял равновесие и вывихнул плечо\n")
+        print(f"Ты попал по врагу с силой {failHit}. Враг попал по тебе с силой {enemyHit}\n")
+        print(f"Здоровье врага {enemyHealth}, твое здоровье {health}\n")
+        enemyHit = 10
     if enemyHealth <= 0:
-        print(f"{name}, поздравляю, ты победил своего первого врага, можешь его осмотреть и забрать все, что найдешь")
+        print ("Поздравляю, враг побежден. Можешь забрать себе все, что найдешь у него.")
+        break
     elif health <= 0:
-        print(f"Тебя одолел первый же враг, {name}. Попробуй еще.")
-    else:
-        continue
+        print ("Ты побежден. Возможно, получиться в следующий раз.")
+        break
