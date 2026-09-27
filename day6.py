@@ -15,7 +15,7 @@ class pet:
     def toFeed(self):
         if self.hunger > 95:
             print (f"Питомец {self.name} сыт. Не притронулся к пище. Сытость {self.hunger}")
-        elif self.hunger < 95:
+        else:
             self.hunger += 10
             print (f"Питомец {self.name} покушал. Голод {self.hunger}")
 
