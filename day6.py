@@ -1,29 +1,30 @@
-class pet:
-    def __init__(self, name, hunger):
+class Animal:
+    def __init__ (self, name, health):
         self.name = name
-        self.hunger = hunger
-    def petHunger(self):
-        if 5 > self.hunger > 0:
-            self.hunger -= self.hunger
-            print (f"Питомец {self.name} голоден. Сытость {self.hunger}")
-        elif self.hunger >= 5:
-            self.hunger -= 5
-            print (f"Питомец {self.name} проголодался. Сытость {self.hunger}")
-        else: 
-            self.hunger = 0
-            print (f"Питомец {self.name} голодает. Сытость {self.hunger}")
-    def toFeed(self):
-        if self.hunger > 95:
-            print (f"Питомец {self.name} сыт. Не притронулся к пище. Сытость {self.hunger}")
+        self.health = health
+    def make_sound(self):
+        print (f"{self.name} издает звук")
+    def info(self):
+        print(f"{self.name}, здоровье: {self.health}")
+
+class Dog(Animal):
+    def make_sound(self):
+        print(f"{self.name} лает: Гав!")
+
+class Cat(Animal):
+    def __init__(self, name, health, is_lazy):
+        super().__init__(name, health)
+        self.is_lazy = is_lazy
+    def make_sound(self):
+        if self.is_lazy:
+            print(f"{self.name} слишком ленив, что бы мяукать")
         else:
-            self.hunger += 10
-            print (f"Питомец {self.name} покушал. Голод {self.hunger}")
+            print(f"{self.name} мяукает: Мяу!")
 
-myPet1 = pet("Mot", 50)
-hisPet1 = pet("Asik", 50)
+myDog = Dog("Neon", 100)
+myCat = Cat("Bee", 100, True)
+hisCat = Cat("Bea", 100, False)
 
-myPet1.petHunger()
-hisPet1.toFeed()
-
-print (f"Голод моего питомца: {myPet1.hunger}")
-print (f"Голод его питомца: {hisPet1.hunger}")
+myDog.make_sound()
+myCat.make_sound()
+hisCat.make_sound()
